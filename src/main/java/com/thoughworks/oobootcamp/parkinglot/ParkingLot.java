@@ -1,27 +1,32 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ParkingLot {
 
   private int space;
 
-  private List<Car> cars = new ArrayList<>();
+  private Map<Ticket, Car> cars = new HashMap<>();
 
   public ParkingLot(int space) {
     this.space = space;
   }
 
   public Ticket park(Car car) {
-    if (cars.size() >= space){
+    if (cars.size() >= space) {
       throw new ParkIsFullException("the park is no available space!");
     }
-    cars.add(car);
-    return new Ticket();
+    Ticket ticket = new Ticket();
+    cars.put(ticket, car);
+    return ticket;
   }
 
-  public int pickCar(Ticket ticket) {
-    return 0;
+  public Car pickCar(Ticket ticket) {
+    Car car = cars.get(ticket);
+    if (car == null) {
+      throw new InvalidTicketException();
+    }
+    return car;
   }
 }
