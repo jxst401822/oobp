@@ -21,4 +21,7 @@ public class ParkingLot {
     return new Ticket();
   }
 
+  public int pickCar(Ticket ticket) {
+    return 0;
+  }
 }
