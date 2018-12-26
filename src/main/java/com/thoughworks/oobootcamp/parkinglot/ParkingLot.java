@@ -35,4 +35,8 @@ public class ParkingLot {
     parkingLot.parkCar(new Car());
     parkingLot.pickCar(null);
   }
+
+  public boolean hasAvailableSpace() {
+    return cars.size() < space;
+  }
 }

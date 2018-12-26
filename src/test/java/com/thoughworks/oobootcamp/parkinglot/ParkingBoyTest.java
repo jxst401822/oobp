@@ -2,25 +2,26 @@ package com.thoughworks.oobootcamp.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ParkingBoyTest {
 
   @Test
-  void shouldReturnTicketWhenParkCarGivenOneCarPickedFromFullParkingLot() {
-    ParkingLot parkingLot = new ParkingLot(2);
-    parkingLot.parkCar(new Car());
-    Ticket ticket = parkingLot.parkCar(new Car());
-    parkingLot.pickCar(ticket);
-
-    assertNotNull(parkingLot.parkCar(new Car()));
-  }
-
-  @Test
   void shouldReturnTicketWhenParkingBoyParkCarGivenSingleParkingLotHasRemainingSpace() {
-    ParkingLot parkingLot = new ParkingLot(2);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(new ParkingLot(2)));
 
     assertNotNull(parkingBoy.parkCar(new Car()));
   }
+
+  @Test
+  void shouldReturnTicketWhenParkingBoyParkCarGivenNo2ParkingLotHasRemainingSpace() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    firstParkingLot.parkCar(new Car());
+    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, new ParkingLot(2)));
+
+    assertNotNull(parkingBoy.parkCar(new Car()));
+  }
+
+
 }
