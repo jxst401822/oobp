@@ -3,6 +3,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParkingLotTest {
@@ -12,7 +13,7 @@ class ParkingLotTest {
     ParkingLot parkingLot = new ParkingLot(1);
     Car car = new Car();
 
-    Ticket ticket = parkingLot.park(car);
+    Ticket ticket = parkingLot.parkCar(car);
 
     assertNotNull(ticket);
   }
@@ -21,27 +22,43 @@ class ParkingLotTest {
   void shouldThrowExceptionWhenParkingGivenNoAvailableSpace() {
     ParkingLot parkingLot = new ParkingLot(1);
     Car car = new Car();
-    parkingLot.park(car);
+    parkingLot.parkCar(car);
 
-    assertThrows(ParkIsFullException.class, () -> parkingLot.park(car));
+    assertThrows(NoSpaceException.class, () -> parkingLot.parkCar(new Car()));
   }
 
   @Test
   void shouldReturnCarWhenPickCarGivenValidTicket() {
     ParkingLot parkingLot = new ParkingLot(1);
     Car car = new Car();
-    Ticket ticket = parkingLot.park(car);
+    Ticket ticket = parkingLot.parkCar(car);
 
-    assertNotNull(parkingLot.pickCar(ticket));
+    assertSame(car, parkingLot.pickCar(ticket));
   }
 
   @Test
   void shouldThrowExceptionWhenPickCarGivenInvalidTicket() {
     ParkingLot parkingLot = new ParkingLot(2);
-    parkingLot.park(new Car());
+    parkingLot.parkCar(new Car());
 
     assertThrows(InvalidTicketException.class, () -> parkingLot.pickCar(new Ticket()));
   }
 
+  @Test
+  void shouldReturnTicketWhenParkCarGivenOneCarPickedFromFullParkingLot() {
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingLot.parkCar(new Car());
+    Ticket ticket = parkingLot.parkCar(new Car());
+    parkingLot.pickCar(ticket);
 
+    assertNotNull(parkingLot.parkCar(new Car()));
+  }
+
+  @Test
+  void shouldReturnTicketWhenParkingBoyParkCarGivenSingleParkingLotHasRemainingSpace() {
+    ParkingLot parkingLot = new ParkingLot(2);
+    ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+    assertNotNull(parkingBoy.parkCar(new Car()));
+  }
 }

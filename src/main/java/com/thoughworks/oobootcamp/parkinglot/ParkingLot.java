@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ParkingLot {
 
-  private int space;
+  private final int space;
 
   private Map<Ticket, Car> cars = new HashMap<>();
 
@@ -13,9 +13,9 @@ public class ParkingLot {
     this.space = space;
   }
 
-  public Ticket park(Car car) {
+  public Ticket parkCar(Car car) {
     if (cars.size() >= space) {
-      throw new ParkIsFullException("the park is no available space!");
+      throw new NoSpaceException("the parkCar is no available space!");
     }
     Ticket ticket = new Ticket();
     cars.put(ticket, car);
@@ -23,10 +23,16 @@ public class ParkingLot {
   }
 
   public Car pickCar(Ticket ticket) {
-    Car car = cars.get(ticket);
+    Car car = cars.remove(ticket);
     if (car == null) {
       throw new InvalidTicketException();
     }
     return car;
+  }
+
+  public static void main(String[] args) {
+    ParkingLot parkingLot = new ParkingLot(2);
+    parkingLot.parkCar(new Car());
+    parkingLot.pickCar(null);
   }
 }
