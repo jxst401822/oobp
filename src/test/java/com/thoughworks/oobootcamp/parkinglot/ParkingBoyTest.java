@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ParkingBoyTest {
 
@@ -30,6 +31,15 @@ class ParkingBoyTest {
     ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
 
     assertNotNull(parkingBoy.pickCar(ticket));
+  }
+
+  @Test
+  void shouldReturnNullWhenParkingBoyParkCarGivenNoTicket() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    firstParkingLot.parkCar(new Car());
+    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
+
+    assertNull(parkingBoy.pickCar(null));
   }
 
 
