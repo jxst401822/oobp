@@ -11,11 +11,6 @@ public class ParkingBoy {
     this.parkingLots = parkingLots;
   }
 
-  public ParkingLot getCurrentParkingLot() {
-    return parkingLots.stream().filter(ParkingLot::hasAvailableSpace)
-        .findFirst().orElse(null);
-  }
-
   public Ticket parkCar(Car car) {
     Optional<ParkingLot> parkingLot = parkingLots.stream().filter(ParkingLot::hasAvailableSpace)
         .findFirst();
