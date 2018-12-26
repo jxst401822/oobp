@@ -18,11 +18,16 @@ class ParkingBoyTest {
   }
 
   @Test
-  void shouldReturnTicketWhenParkingBoyParkCarGivenNo2ParkingLotHasRemainingSpace() {
+  void shouldReturnTicketWhenParkingBoyParkCarGivenSecondParkingLotHasRemainingSpace() {
     ParkingLot firstParkingLot = new ParkingLot(1);
     ParkingLot secondParkingLot = new ParkingLot(2);
+    ParkingLot thirdParkingLot = new ParkingLot(3);
+    ParkingLot fourthParkingLot = new ParkingLot(4);
+    ParkingLot fifthParkingLot = new ParkingLot(5);
     firstParkingLot.parkCar(new Car());
-    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+    ParkingBoy parkingBoy = new ParkingBoy(
+        newArrayList(firstParkingLot, secondParkingLot, thirdParkingLot, fourthParkingLot,
+            fifthParkingLot));
     Car myCar = new Car();
 
     Ticket ticket = parkingBoy.parkCar(myCar);
