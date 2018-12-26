@@ -1,6 +1,5 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
-import com.sun.javafx.tk.TKClipboard;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class ParkingLot {
 
   public Ticket parkCar(Car car) {
     if (cars.size() >= space) {
-      throw new NoSpaceException("the parkCar is no available space!");
+      throw new NoSpaceException();
     }
     Ticket ticket = new Ticket();
     cars.put(ticket, car);

@@ -19,14 +19,13 @@ public class ParkingBoy {
   public Ticket parkCar(Car car) {
     Optional<ParkingLot> parkingLot = parkingLots.stream().filter(ParkingLot::hasAvailableSpace)
         .findFirst();
-    return parkingLot.map(data -> data.parkCar(car)).orElse(null);
+    return parkingLot.map(data -> data.parkCar(car)).orElseThrow(NoSpaceException::new);
   }
 
   public Car pickCar(Ticket ticket) {
     Optional<ParkingLot> parkingLot = parkingLots.stream().filter(data -> data.hasParkedCar(ticket))
         .findAny();
-    return parkingLot.map(data -> data.pickCar(ticket)).orElse(null);
+    return parkingLot.map(data -> data.pickCar(ticket)).orElseThrow(InvalidTicketException::new);
   }
-
 
 }

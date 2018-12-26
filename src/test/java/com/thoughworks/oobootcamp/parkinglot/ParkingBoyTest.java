@@ -6,6 +6,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParkingBoyTest {
 
@@ -19,21 +20,14 @@ class ParkingBoyTest {
   @Test
   void shouldReturnTicketWhenParkingBoyParkCarGivenNo2ParkingLotHasRemainingSpace() {
     ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(2);
     firstParkingLot.parkCar(new Car());
-    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, new ParkingLot(2)));
+    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, secondParkingLot));
+    Car myCar = new Car();
 
-    assertNotNull(parkingBoy.parkCar(new Car()));
-  }
+    Ticket ticket = parkingBoy.parkCar(myCar);
 
-  @Test
-  void shouldParkCarInFirstParkingLotWhenParkingBoyParkCarGivenAllParkingLotsHaveRemainingSpace() {
-    ParkingLot firstParkingLot = new ParkingLot(1);
-    ParkingLot secondParkingLot = new ParkingLot(1);
-    ParkingLot thirdParkingLot = new ParkingLot(1);
-    ParkingBoy parkingBoy = new ParkingBoy(
-        newArrayList(firstParkingLot, secondParkingLot, thirdParkingLot));
-
-    assertEquals(firstParkingLot, parkingBoy.getCurrentParkingLot());
+    assertEquals(myCar, secondParkingLot.pickCar(ticket));
   }
 
   @Test
@@ -46,21 +40,21 @@ class ParkingBoyTest {
   }
 
   @Test
-  void shouldReturnNullWhenParkingBoyParkCarGivenNoTicket() {
+  void shouldThrowExceptionWhenParkingBoyParkCarGivenNoTicket() {
     ParkingLot firstParkingLot = new ParkingLot(1);
     firstParkingLot.parkCar(new Car());
     ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
 
-    assertNull(parkingBoy.pickCar(null));
+    assertThrows(InvalidTicketException.class, () -> parkingBoy.pickCar(null));
   }
 
   @Test
-  void shouldReturnNullWhenParkingBoyParkCarGivenInvalidTicket() {
+  void shouldThrowExceptionWhenParkingBoyParkCarGivenInvalidTicket() {
     ParkingLot firstParkingLot = new ParkingLot(1);
     firstParkingLot.parkCar(new Car());
     ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
 
-    assertNull(parkingBoy.pickCar(new Ticket()));
+    assertThrows(InvalidTicketException.class, () -> parkingBoy.pickCar(new Ticket()));
   }
 
 
