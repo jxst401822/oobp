@@ -16,4 +16,10 @@ public class ParkingBoy {
         .findFirst();
     return parkingLot.map(data -> data.parkCar(car)).orElse(null);
   }
+
+  public Car pickCar(Ticket ticket) {
+    Optional<ParkingLot> parkingLot = parkingLots.stream().filter(data -> data.hasParkedCar(ticket))
+        .findAny();
+    return parkingLot.map(data -> data.pickCar(ticket)).orElse(null);
+  }
 }

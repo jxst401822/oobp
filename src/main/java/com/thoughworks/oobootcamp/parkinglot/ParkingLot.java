@@ -1,5 +1,6 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
+import com.sun.javafx.tk.TKClipboard;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,5 +39,10 @@ public class ParkingLot {
 
   public boolean hasAvailableSpace() {
     return cars.size() < space;
+  }
+
+
+  public boolean hasParkedCar(Ticket ticket) {
+    return cars.containsKey(ticket);
   }
 }

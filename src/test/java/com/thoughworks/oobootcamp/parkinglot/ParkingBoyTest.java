@@ -23,5 +23,14 @@ class ParkingBoyTest {
     assertNotNull(parkingBoy.parkCar(new Car()));
   }
 
+  @Test
+  void shouldReturnCarWhenParkingBoyParkCarGivenValidTicket() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    Ticket ticket = firstParkingLot.parkCar(new Car());
+    ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
+
+    assertNotNull(parkingBoy.pickCar(ticket));
+  }
+
 
 }
