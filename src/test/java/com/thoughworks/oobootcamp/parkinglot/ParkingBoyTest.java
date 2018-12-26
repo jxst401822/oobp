@@ -3,6 +3,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -22,6 +23,17 @@ class ParkingBoyTest {
     ParkingBoy parkingBoy = new ParkingBoy(newArrayList(firstParkingLot, new ParkingLot(2)));
 
     assertNotNull(parkingBoy.parkCar(new Car()));
+  }
+
+  @Test
+  void shouldParkCarInFirstParkingLotWhenParkingBoyParkCarGivenAllParkingLotsHaveRemainingSpace() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(1);
+    ParkingLot thirdParkingLot = new ParkingLot(1);
+    ParkingBoy parkingBoy = new ParkingBoy(
+        newArrayList(firstParkingLot, secondParkingLot, thirdParkingLot));
+
+    assertEquals(firstParkingLot, parkingBoy.getCurrentParkingLot());
   }
 
   @Test
