@@ -66,7 +66,6 @@ public class SmartParkingBoyTest {
   void should_return_car_when_smart_boy_picking_car_given_valid_ticket() {
     ParkingLot firstParkingLot = new ParkingLot(1);
     ParkingLot secondParkingLot = new ParkingLot(2);
-
     SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
         newArrayList(firstParkingLot, secondParkingLot));
     Car myCar = new Car();
@@ -74,6 +73,18 @@ public class SmartParkingBoyTest {
     Ticket ticket = smartParkingBoy.parkCar(myCar);
 
     assertSame(myCar, smartParkingBoy.pickCar(ticket));
+  }
+
+  @Test
+  void should_throw_exception_when_smart_boy_picking_car_given_invalid_ticket() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
+        newArrayList(firstParkingLot, secondParkingLot));
+    Car myCar = new Car();
+    smartParkingBoy.parkCar(myCar);
+
+    assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickCar(new Ticket()));
   }
 
 
