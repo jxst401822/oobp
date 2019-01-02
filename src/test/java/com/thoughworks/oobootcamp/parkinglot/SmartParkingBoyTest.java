@@ -87,5 +87,17 @@ public class SmartParkingBoyTest {
     assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickCar(new Ticket()));
   }
 
+ @Test
+  void should_throw_exception_when_smart_boy_picking_car_given_ticket_null() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
+        newArrayList(firstParkingLot, secondParkingLot));
+    Car myCar = new Car();
+    smartParkingBoy.parkCar(myCar);
+
+    assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickCar(null));
+  }
+
 
 }
