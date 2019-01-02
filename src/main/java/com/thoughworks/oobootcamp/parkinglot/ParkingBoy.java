@@ -2,22 +2,17 @@ package com.thoughworks.oobootcamp.parkinglot;
 
 import java.util.List;
 
-public class ParkingBoy {
+public class ParkingBoy extends BaseParkingBoy {
 
-  private List<ParkingLot> parkingLots;
 
   public ParkingBoy(List<ParkingLot> parkingLots) {
-    this.parkingLots = parkingLots;
+    setParkingLots(parkingLots);
   }
 
+  @Override
   public Ticket parkCar(Car car) {
-    return parkingLots.stream().filter(ParkingLot::hasAvailableSpace).findFirst()
+    return getParkingLots().stream().filter(ParkingLot::hasAvailableSpace).findFirst()
         .orElseThrow(NoSpaceException::new).parkCar(car);
-  }
-
-  public Car pickCar(Ticket ticket) {
-    return parkingLots.stream().filter(data -> data.hasParkedCar(ticket)).findAny()
-        .orElseThrow(InvalidTicketException::new).pickCar(ticket);
   }
 
 }

@@ -1,10 +1,18 @@
 package com.thoughworks.oobootcamp.parkinglot;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-public class SmartParkingBoy extends ParkingBoy{
+public class SmartParkingBoy extends BaseParkingBoy {
 
-  public SmartParkingBoy(ArrayList<ParkingLot> parkingLots) {
-    super(parkingLots);
+  public SmartParkingBoy(List<ParkingLot> parkingLots) {
+    setParkingLots(parkingLots);
   }
+
+  @Override
+  public Ticket parkCar(Car car) {
+    return getParkingLots().stream().max(Comparator.comparing(ParkingLot::getAvailableSpace))
+        .orElseThrow(NoSpaceException::new).parkCar(car);
+  }
+
 }
