@@ -14,7 +14,9 @@ public class SmartParkingBoyTest {
     SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
         newArrayList(firstParkingLot, secondParkingLot));
     Car myCar = new Car();
+
     Ticket ticket = smartParkingBoy.parkCar(myCar);
+
     assertNotNull(ticket);
     assertSame(myCar, firstParkingLot.pickCar(ticket));
   }
@@ -26,7 +28,9 @@ public class SmartParkingBoyTest {
     SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
         newArrayList(firstParkingLot, secondParkingLot));
     Car myCar = new Car();
+
     Ticket ticket = smartParkingBoy.parkCar(myCar);
+
     assertNotNull(ticket);
     assertSame(myCar, firstParkingLot.pickCar(ticket));
   }
@@ -38,7 +42,9 @@ public class SmartParkingBoyTest {
     SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
         newArrayList(firstParkingLot, secondParkingLot));
     Car myCar = new Car();
+
     Ticket ticket = smartParkingBoy.parkCar(myCar);
+
     assertNotNull(ticket);
     assertSame(myCar, secondParkingLot.pickCar(ticket));
   }
@@ -52,7 +58,22 @@ public class SmartParkingBoyTest {
     SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
         newArrayList(firstParkingLot, secondParkingLot));
     Car myCar = new Car();
+
     assertThrows(NoSpaceException.class, () -> smartParkingBoy.parkCar(myCar));
+  }
+
+  @Test
+  void should_return_car_when_smart_boy_picking_car_given_valid_ticket() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(2);
+
+    SmartParkingBoy smartParkingBoy = new SmartParkingBoy(
+        newArrayList(firstParkingLot, secondParkingLot));
+    Car myCar = new Car();
+
+    Ticket ticket = smartParkingBoy.parkCar(myCar);
+
+    assertSame(myCar, smartParkingBoy.pickCar(ticket));
   }
 
 
