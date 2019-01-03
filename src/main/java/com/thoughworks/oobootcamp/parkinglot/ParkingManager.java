@@ -9,7 +9,7 @@ public class ParkingManager {
   public Ticket parkCar(Car myCar) {
     return parkingables.stream().filter(e -> e.hasAvailableSpace() && (e instanceof BaseParkingBoy))
         .findFirst().orElse(parkingables.stream().filter(Parkingable::hasAvailableSpace).findFirst()
-            .orElseThrow(InvalidTicketException::new)).parkCar(myCar);
+            .orElseThrow(NoSpaceException::new)).parkCar(myCar);
   }
 
   public void assignParkingableList(ArrayList<Parkingable> parkingables) {

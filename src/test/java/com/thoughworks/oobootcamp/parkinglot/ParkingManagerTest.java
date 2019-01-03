@@ -95,4 +95,18 @@ public class ParkingManagerTest {
     Assertions.assertSame(myCar, secondParkingLot.pickCar(ticket));
   }
 
+  @Test
+  void should_throw_exception_when_request_parking_manager_parking_car_given_manager_and_parking_boy_both_has_one_no_space_parking_lots() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    Parkingable secondParkingLot = new ParkingLot(1);
+    Parkingable parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
+    parkingBoy.parkCar(new Car());
+    secondParkingLot.parkCar(new Car());
+    ParkingManager parkingManager = new ParkingManager();
+    parkingManager.assignParkingableList(newArrayList(secondParkingLot, parkingBoy));
+    Car myCar = new Car();
+
+    Assertions.assertThrows(NoSpaceException.class,()->parkingManager.parkCar(myCar));
+  }
+
 }
