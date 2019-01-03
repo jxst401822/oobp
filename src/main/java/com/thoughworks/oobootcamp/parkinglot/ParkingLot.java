@@ -3,7 +3,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot implements Parkingable {
 
   private final int space;
 
@@ -13,6 +13,7 @@ public class ParkingLot {
     this.space = space;
   }
 
+  @Override
   public Ticket parkCar(Car car) {
     if (cars.size() >= space) {
       throw new NoSpaceException();
@@ -30,6 +31,7 @@ public class ParkingLot {
     return car;
   }
 
+  @Override
   public boolean hasAvailableSpace() {
     return cars.size() < space;
   }

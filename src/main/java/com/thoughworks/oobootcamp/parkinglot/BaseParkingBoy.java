@@ -2,7 +2,7 @@ package com.thoughworks.oobootcamp.parkinglot;
 
 import java.util.List;
 
-public abstract class BaseParkingBoy {
+public abstract class BaseParkingBoy implements Parkingable {
 
   private List<ParkingLot> parkingLots;
 
@@ -14,7 +14,13 @@ public abstract class BaseParkingBoy {
     this.parkingLots = parkingLots;
   }
 
+  @Override
   public abstract Ticket parkCar(Car car);
+
+  @Override
+  public boolean hasAvailableSpace() {
+    return parkingLots.stream().anyMatch(ParkingLot::hasAvailableSpace);
+  }
 
   public Car pickCar(Ticket ticket) {
     return parkingLots.stream().filter(data -> data.hasParkedCar(ticket)).findAny()
