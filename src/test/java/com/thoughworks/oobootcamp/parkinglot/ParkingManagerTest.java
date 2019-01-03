@@ -106,7 +106,22 @@ public class ParkingManagerTest {
     parkingManager.assignParkingableList(newArrayList(secondParkingLot, parkingBoy));
     Car myCar = new Car();
 
-    Assertions.assertThrows(NoSpaceException.class,()->parkingManager.parkCar(myCar));
+    Assertions.assertThrows(NoSpaceException.class, () -> parkingManager.parkCar(myCar));
+  }
+
+  @Test
+  void should_return_car_when_request_parking_manager_picking_car_given_manager_and_has_a_parking_boy() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    Parkingable parkingBoy = new ParkingBoy(newArrayList(firstParkingLot));
+
+    ParkingManager parkingManager = new ParkingManager();
+    parkingManager.assignParkingableList(newArrayList(parkingBoy));
+    Car myCar = new Car();
+
+    Ticket ticket = parkingManager.parkCar(myCar);
+
+    Assertions.assertNotNull(ticket);
+    Assertions.assertSame(myCar, parkingManager.pickCar(ticket));
   }
 
 }

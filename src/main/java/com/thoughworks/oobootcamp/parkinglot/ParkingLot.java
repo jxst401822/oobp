@@ -41,6 +41,7 @@ public class ParkingLot implements Parkingable {
     return space - cars.size();
   }
 
+  @Override
   public boolean hasParkedCar(Ticket ticket) {
     return cars.containsKey(ticket);
   }

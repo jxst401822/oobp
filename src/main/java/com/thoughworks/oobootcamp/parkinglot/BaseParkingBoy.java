@@ -23,6 +23,11 @@ public abstract class BaseParkingBoy implements Parkingable {
   }
 
   @Override
+  public boolean hasParkedCar(Ticket ticket) {
+    return parkingLots.stream().anyMatch(e -> e.hasParkedCar(ticket));
+  }
+
+  @Override
   public Car pickCar(Ticket ticket) {
     return parkingLots.stream().filter(data -> data.hasParkedCar(ticket)).findAny()
         .orElseThrow(InvalidTicketException::new).pickCar(ticket);

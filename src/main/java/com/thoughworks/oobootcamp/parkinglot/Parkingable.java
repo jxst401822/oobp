@@ -7,4 +7,6 @@ public interface Parkingable {
   boolean hasAvailableSpace();
 
   Car pickCar(Ticket ticket);
+
+  boolean hasParkedCar(Ticket ticket);
 }

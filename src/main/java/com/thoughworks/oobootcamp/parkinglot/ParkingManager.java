@@ -15,4 +15,9 @@ public class ParkingManager {
   public void assignParkingableList(ArrayList<Parkingable> parkingables) {
     this.parkingables = parkingables;
   }
+
+  public Car pickCar(Ticket ticket) {
+    return parkingables.stream().filter(e -> e.hasParkedCar(ticket)).findAny()
+        .orElseThrow(InvalidTicketException::new).pickCar(ticket);
+  }
 }
