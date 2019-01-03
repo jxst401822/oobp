@@ -17,4 +17,19 @@ public class ParkingManagerTest {
     Assertions.assertNotNull(ticket);
     Assertions.assertSame(myCar, parkingLot.pickCar(ticket));
   }
+
+  @Test
+  void should_return_ticket_when_parking_manager_parking_car_given_two_available_space_parking_lot() {
+    ParkingLot firstParkingLot = new ParkingLot(1);
+    ParkingLot secondParkingLot = new ParkingLot(1);
+    ParkingManager parkingManager = new ParkingManager(
+        newArrayList(firstParkingLot, secondParkingLot));
+    Car myCar = new Car();
+    Ticket ticket = parkingManager.parkCar(myCar);
+
+    Assertions.assertNotNull(ticket);
+    Assertions.assertSame(myCar, firstParkingLot.pickCar(ticket));
+  }
+
+
 }
