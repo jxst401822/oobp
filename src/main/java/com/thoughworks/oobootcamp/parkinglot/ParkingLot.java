@@ -23,6 +23,7 @@ public class ParkingLot implements Parkingable {
     return ticket;
   }
 
+  @Override
   public Car pickCar(Ticket ticket) {
     Car car = cars.remove(ticket);
     if (car == null) {

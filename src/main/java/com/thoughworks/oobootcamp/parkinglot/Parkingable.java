@@ -5,4 +5,6 @@ public interface Parkingable {
   Ticket parkCar(Car car);
 
   boolean hasAvailableSpace();
+
+  Car pickCar(Ticket ticket);
 }
