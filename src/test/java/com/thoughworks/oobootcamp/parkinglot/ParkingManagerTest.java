@@ -130,4 +130,10 @@ public class ParkingManagerTest {
         () -> new ParkingManager().pickCar(new Ticket()));
   }
 
+  @Test
+  void should_throw_when_request_parking_manager_picking_car_given_without_ticket() {
+    Assertions.assertThrows(InvalidTicketException.class,
+        () -> new ParkingManager().pickCar(null));
+  }
+
 }
