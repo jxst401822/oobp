@@ -6,6 +6,10 @@ public class ParkingManager {
 
   private ArrayList<Parkingable> parkingables;
 
+  public ParkingManager() {
+    this.parkingables = new ArrayList<>();
+  }
+
   public Ticket parkCar(Car myCar) {
     return parkingables.stream().filter(e -> e.hasAvailableSpace() && (e instanceof BaseParkingBoy))
         .findFirst().orElse(parkingables.stream().filter(Parkingable::hasAvailableSpace).findFirst()
@@ -13,7 +17,7 @@ public class ParkingManager {
   }
 
   public void assignParkingableList(ArrayList<Parkingable> parkingables) {
-    this.parkingables = parkingables;
+    this.parkingables.addAll(parkingables);
   }
 
   public Car pickCar(Ticket ticket) {
